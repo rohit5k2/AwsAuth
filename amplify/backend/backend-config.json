@@ -1,0 +1,9 @@
+{
+	"auth": {
+		"awsauthc380d4ca": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}

@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "rohit5k2.awsauth"
-        minSdkVersion 15
+        minSdkVersion 23 // Can be 15 is not drop-in UI is used
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -32,4 +32,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //For AWSMobileClient only:
+    implementation 'com.amazonaws:aws-android-sdk-mobile-client:2.14.+'
+
+    //For the drop-in UI also:
+    implementation 'com.amazonaws:aws-android-sdk-auth-userpools:2.14.+'
+    implementation 'com.amazonaws:aws-android-sdk-auth-ui:2.14.+'
+
 }
