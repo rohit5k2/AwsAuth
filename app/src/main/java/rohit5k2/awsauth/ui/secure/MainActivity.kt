@@ -2,6 +2,7 @@ package rohit5k2.awsauth.ui.secure
 
 import android.os.Bundle
 import rohit5k2.awsauth.R
+import rohit5k2.awsauth.backend.handler.AwsAPIHandler
 import rohit5k2.awsauth.ui.helper.BaseActivity
 
 /**
@@ -21,6 +22,6 @@ class MainActivity : BaseActivity() {
     }
 
     private fun logout(){
-        //TODO: Logout here
+        AwsAPIHandler.instance.logout()
     }
 }
