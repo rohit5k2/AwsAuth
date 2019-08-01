@@ -1,6 +1,5 @@
 package rohit5k2.awsauth.ui.open
 
-import android.content.Intent
 import android.os.Bundle
 import com.amazonaws.mobile.auth.core.internal.util.ThreadUtils
 import com.amazonaws.mobile.client.results.SignUpResult
@@ -12,7 +11,6 @@ import rohit5k2.awsauth.model.SignUpData
 import rohit5k2.awsauth.ui.helper.BaseActivity
 import rohit5k2.awsauth.ui.helper.SuccessFailureContract
 import rohit5k2.awsauth.ui.subui.ConfirmationDialog
-import rohit5k2.awsauth.utils.CLog
 import java.lang.Exception
 
 /**
@@ -66,63 +64,17 @@ class SignUpActivity: BaseActivity() {
         })
     }
 
-    private fun goToLogin(){
-        startActivity(Intent(this@SignUpActivity, LoginActivity::class.java))
-        finish()
-    }
-
     private fun showCodeConfirmationDialog(){
-        confiramationDialog = ConfirmationDialog(this@SignUpActivity, object :ConfirmationDialog.Callback{
-            override fun onConfirm(code: String) {
-                CLog.i("confirmed with $code")
-                confirmCode(code)
+        confiramationDialog = ConfirmationDialog(this@SignUpActivity, signUpData!!.email, object :ConfirmationDialog.Callback{
+            override fun done() {
+                goToLogin()
             }
 
-            override fun onResend() {
-                CLog.i("Resend code")
-                resendCode()
+            override fun showMessage(message: String) {
+                showToast(message)
             }
         })
 
         confiramationDialog!!.show()
-    }
-
-    private fun confirmCode(code:String){
-        AwsAPIHandler.instance.cofirmCode(signUpData!!.email, code, object :SuccessFailureContract<SignUpResult, Exception>{
-            override fun successful(data: SignUpResult) {
-                ThreadUtils.runOnUiThread{
-                    if (!data.confirmationState) {
-                        showToast("Confirm sign up with " + data.userCodeDeliveryDetails.destination)
-                    } else {
-                        confiramationDialog?.dismiss()
-                        showToast("Confirmation successful.")
-                        goToLogin()
-                    }
-                }
-            }
-
-            override fun failed(data: Exception) {
-                ThreadUtils.runOnUiThread {
-                    showToast("Confirmation failed, please try again.")
-                }
-            }
-        })
-    }
-
-    private fun resendCode(){
-        AwsAPIHandler.instance.resendCode(signUpData!!.email, object :SuccessFailureContract<SignUpResult, Exception>{
-            override fun successful(data: SignUpResult) {
-                ThreadUtils.runOnUiThread{
-                    showToast("A verification code has been sent via" + data.userCodeDeliveryDetails.deliveryMedium
-                            + " at " + data.userCodeDeliveryDetails.destination)
-                }
-            }
-
-            override fun failed(data: Exception) {
-                ThreadUtils.runOnUiThread {
-                    showToast("Something weird happened while resending code.")
-                }
-            }
-        })
     }
 }

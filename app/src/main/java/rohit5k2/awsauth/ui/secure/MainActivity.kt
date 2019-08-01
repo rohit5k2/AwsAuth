@@ -14,4 +14,13 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        logout()
+    }
+
+    private fun logout(){
+        //TODO: Logout here
+    }
 }
