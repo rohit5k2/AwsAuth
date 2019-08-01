@@ -3,6 +3,8 @@ package rohit5k2.awsauth.backend.handler
 import com.amazonaws.mobile.client.results.SignUpResult
 import rohit5k2.awsauth.backend.helper.AWSCommHandler
 import com.amazonaws.mobile.client.Callback
+import com.amazonaws.services.cognitoidentityprovider.model.ResendConfirmationCodeResult
+import rohit5k2.awsauth.model.SignUpData
 import rohit5k2.awsauth.ui.helper.SuccessFailureContract
 import java.lang.Exception
 
@@ -14,16 +16,40 @@ class AwsAPIHandler {
         val instance:AwsAPIHandler = AwsAPIHandler()
     }
 
-    fun <S, F>signup(listener:SuccessFailureContract<S, F>){
-        AWSCommHandler.getMobileClient().signUp("","", null, null, object:Callback<SignUpResult>{
+    fun <S, F>signup(signUpData: SignUpData, listener:SuccessFailureContract<S, F>){
+        AWSCommHandler.getMobileClient().signUp(signUpData.email, signUpData.password, signUpData.attributes, null, object:Callback<SignUpResult>{
             override fun onResult(result: SignUpResult?) {
                 listener.successful(result as S)
             }
 
             override fun onError(e: Exception?) {
-                listener.failed(e?.message as F)
+                listener.failed(e as F)
             }
 
+        })
+    }
+
+    fun <S,F>cofirmCode(userName:String?, code:String, listener:SuccessFailureContract<S,F>){
+        AWSCommHandler.getMobileClient().confirmSignUp(userName, code, object :Callback<SignUpResult>{
+            override fun onResult(result: SignUpResult?) {
+                listener.successful(result as S)
+            }
+
+            override fun onError(e: Exception?) {
+                listener.failed(e as F)
+            }
+        })
+    }
+
+    fun<S,F>resendCode(username:String, listener:SuccessFailureContract<S,F>){
+        AWSCommHandler.getMobileClient().resendSignUp(username, object :Callback<SignUpResult>{
+            override fun onResult(result: SignUpResult?) {
+                listener.successful(result as S)
+            }
+
+            override fun onError(e: Exception?) {
+                listener.failed(e as F)
+            }
         })
     }
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/login_layout"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:padding="10dp"
+              android:minWidth="300dp"
+              android:minHeight="300dp"
+              android:background="@drawable/frame_border"
+              android:orientation="vertical">
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Sign Up Confirmation"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginBottom="25dp"
+            android:textStyle="bold"/>
+
+    <EditText
+            android:id="@+id/code_code"
+            android:singleLine="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/password"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:hint="Confirmation Code"
+            android:inputType="number"
+            android:maxLength="10"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="16sp"/>
+
+    <Button
+            android:id="@+id/code_confirm"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/button_selector"
+            android:padding="3dp"
+            android:text="Confirm"
+            android:textColor="#009688"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/code_resend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:padding="10dp"
+            android:text="Resend code"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+</LinearLayout>

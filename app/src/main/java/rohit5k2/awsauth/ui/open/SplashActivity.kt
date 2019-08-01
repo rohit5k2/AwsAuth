@@ -7,7 +7,7 @@ import com.amazonaws.mobile.client.UserState
 import com.amazonaws.mobile.client.UserStateDetails
 import rohit5k2.awsauth.R
 import rohit5k2.awsauth.backend.helper.AWSCommHandler
-import rohit5k2.awsauth.ui.helper.BaseOpenActivity
+import rohit5k2.awsauth.ui.helper.BaseActivity
 import rohit5k2.awsauth.ui.helper.SuccessFailureContract
 import rohit5k2.awsauth.ui.secure.MainActivity
 import rohit5k2.awsauth.utils.CLog
@@ -15,7 +15,7 @@ import rohit5k2.awsauth.utils.CLog
 /**
  * Created by Rohit on 7/31/2019:2:23 PM
  */
-class SplashActivity : BaseOpenActivity() {
+class SplashActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_ativity)

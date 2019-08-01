@@ -2,15 +2,14 @@ package rohit5k2.awsauth.ui.open
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import rohit5k2.awsauth.R
-import rohit5k2.awsauth.ui.helper.BaseOpenActivity
+import rohit5k2.awsauth.ui.helper.BaseActivity
 
 /**
  * Created by Rohit on 7/31/2019:4:25 PM
  */
-class LoginActivity : BaseOpenActivity() {
+class LoginActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

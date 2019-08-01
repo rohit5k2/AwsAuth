@@ -1,15 +1,14 @@
 package rohit5k2.awsauth.ui.secure
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import rohit5k2.awsauth.R
-import rohit5k2.awsauth.ui.helper.BaseSecureActivity
+import rohit5k2.awsauth.ui.helper.BaseActivity
 
 /**
  * Created by Rohit on 7/31/2019:2:19 PM
  */
 
-class MainActivity : BaseSecureActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

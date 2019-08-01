@@ -1,5 +1,6 @@
 package rohit5k2.awsauth.ui.helper
 
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 /**
@@ -7,4 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
  */
 abstract class BaseActivity: AppCompatActivity() {
 
+    protected fun showToast(message:String){
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
 }
