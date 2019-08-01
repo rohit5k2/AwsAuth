@@ -64,4 +64,8 @@ class AwsAPIHandler {
             }
         })
     }
+
+    fun logout(){
+        AWSCommHandler.getMobileClient().signOut()
+    }
 }

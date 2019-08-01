@@ -46,6 +46,9 @@ class LoginActivity : BaseActivity() {
                 override fun successful(data: SignInResult) {
                     CLog.i("Sign in state is ${data.signInState}")
                     goToMain()
+
+                    //TODO: NEW_PASSWORD_REQUIRED
+                    //Need to implement force change password here
                 }
 
                 override fun failed(data: Exception) {

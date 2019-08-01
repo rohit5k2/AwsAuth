@@ -1,6 +1,5 @@
 package rohit5k2.awsauth.ui.open
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.amazonaws.mobile.client.UserState
@@ -9,7 +8,6 @@ import rohit5k2.awsauth.R
 import rohit5k2.awsauth.backend.helper.AWSCommHandler
 import rohit5k2.awsauth.ui.helper.BaseActivity
 import rohit5k2.awsauth.ui.helper.SuccessFailureContract
-import rohit5k2.awsauth.ui.secure.MainActivity
 import rohit5k2.awsauth.utils.CLog
 
 /**
@@ -41,8 +39,8 @@ class SplashActivity : BaseActivity() {
 
     private fun findUserStatusAndMove(userStateDetails: UserStateDetails){
         when(userStateDetails.userState){
-            UserState.SIGNED_IN -> startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            UserState.SIGNED_OUT -> startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+            UserState.SIGNED_IN -> goToMain()
+            UserState.SIGNED_OUT -> goToLogin()
         }
 
         CLog.i("Status is ${userStateDetails.userState.name}")
