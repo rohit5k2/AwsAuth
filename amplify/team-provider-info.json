@@ -1,0 +1,19 @@
+{
+    "windows": {
+        "awscloudformation": {
+            "AuthRoleName": "awsauth-windows-20190731132824-authRole",
+            "UnauthRoleArn": "arn:aws:iam::002807997966:role/awsauth-windows-20190731132824-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::002807997966:role/awsauth-windows-20190731132824-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "awsauth-windows-20190731132824-deployment",
+            "UnauthRoleName": "awsauth-windows-20190731132824-unauthRole",
+            "StackName": "awsauth-windows-20190731132824",
+            "StackId": "arn:aws:cloudformation:us-east-2:002807997966:stack/awsauth-windows-20190731132824/fb6ff560-b368-11e9-a581-0626229bfdda"
+        },
+        "categories": {
+            "auth": {
+                "awsauthc380d4ca": {}
+            }
+        }
+    }
+}
