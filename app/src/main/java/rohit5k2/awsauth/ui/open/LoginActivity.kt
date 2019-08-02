@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.amazonaws.mobile.auth.core.internal.util.ThreadUtils
 import com.amazonaws.mobile.client.results.SignInResult
+import com.amazonaws.mobile.client.results.SignInState
 import com.amazonaws.services.cognitoidentityprovider.model.UserNotConfirmedException
 import kotlinx.android.synthetic.main.activity_login.*
 import rohit5k2.awsauth.R
@@ -45,10 +46,19 @@ class LoginActivity : BaseActivity() {
             object :SuccessFailureContract<SignInResult, Exception>{
                 override fun successful(data: SignInResult) {
                     CLog.i("Sign in state is ${data.signInState}")
-                    goToMain()
+                    if(data.signInState == SignInState.DONE)
+                        goToMain()
+                    else
+                        failed(java.lang.Exception())
 
                     //TODO: NEW_PASSWORD_REQUIRED
-                    //Need to implement force change password here
+                    /**
+                     * ------Confirm sign in flow-----
+                     * For users which are required to change their passwords after successful first login.
+                     * This challenge should be passed with NEW_PASSWORD and any other required attributes.
+                     *
+                     * This need FORCE change password flow
+                     */
                 }
 
                 override fun failed(data: Exception) {

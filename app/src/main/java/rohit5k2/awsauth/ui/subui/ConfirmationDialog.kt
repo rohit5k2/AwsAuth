@@ -40,8 +40,7 @@ class ConfirmationDialog(context: Context, userName: String, listener:Callback):
     }
 
     private fun confirmCode(code:String){
-        AwsAPIHandler.instance.confirmCode(data, code, object :
-            SuccessFailureContract<SignUpResult, Exception> {
+        AwsAPIHandler.instance.confirmCode(data, code, object : SuccessFailureContract<SignUpResult, Exception> {
             override fun successful(data: SignUpResult) {
                 ThreadUtils.runOnUiThread{
                     if (!data.confirmationState) {
