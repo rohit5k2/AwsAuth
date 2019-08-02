@@ -10,9 +10,12 @@ import kotlinx.android.synthetic.main.activity_login.*
 import rohit5k2.awsauth.R
 import rohit5k2.awsauth.backend.handler.AwsAPIHandler
 import rohit5k2.awsauth.ui.helper.BaseActivity
+import rohit5k2.awsauth.ui.helper.BaseDialog
 import rohit5k2.awsauth.ui.helper.SuccessFailureContract
 import rohit5k2.awsauth.ui.subui.ConfirmationDialog
+import rohit5k2.awsauth.ui.subui.ForgotPasswordDialog
 import rohit5k2.awsauth.utils.CLog
+import javax.security.auth.callback.Callback
 
 /**
  * Created by Rohit on 7/31/2019:4:25 PM
@@ -22,13 +25,11 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        initUI()
     }
 
-    private fun initUI(){
+    override fun wireEvents(){
         forgot_password.setOnClickListener {
-            //TODO: Open Forgot password activity
+            showForgotPasswordDialog()
         }
 
         signup.setOnClickListener {
@@ -72,8 +73,20 @@ class LoginActivity : BaseActivity() {
             })
     }
 
+    private fun showForgotPasswordDialog(){
+        ForgotPasswordDialog(this@LoginActivity, object :BaseDialog.Callback{
+            override fun done() {
+                goToLogin()
+            }
+
+            override fun showMessage(message: String) {
+                showToast(message)
+            }
+        }).show()
+    }
+
     private fun showCodeConfirmationDialog(){
-        ConfirmationDialog(this@LoginActivity, login_emailid.text.toString(), object : ConfirmationDialog.Callback{
+        ConfirmationDialog(this@LoginActivity, login_emailid.text.toString(), object : BaseDialog.Callback{
             override fun done() {
                 goToLogin()
             }

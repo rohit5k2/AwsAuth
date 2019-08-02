@@ -3,10 +3,12 @@ package rohit5k2.awsauth.backend.handler
 import com.amazonaws.mobile.client.results.SignUpResult
 import rohit5k2.awsauth.backend.helper.AWSCommHandler
 import com.amazonaws.mobile.client.Callback
+import com.amazonaws.mobile.client.results.ForgotPasswordResult
 import com.amazonaws.mobile.client.results.SignInResult
 import rohit5k2.awsauth.model.SignUpData
 import rohit5k2.awsauth.ui.helper.SuccessFailureContract
 import java.lang.Exception
+import java.util.*
 
 /**
  * Created by Rohit on 7/31/2019:7:22 PM
@@ -56,6 +58,30 @@ class AwsAPIHandler {
     fun <S,F> login(username: String, password:String, listener:SuccessFailureContract<S, F>){
         AWSCommHandler.getMobileClient().signIn(username, password, null, object :Callback<SignInResult>{
             override fun onResult(result: SignInResult?) {
+                listener.successful(result as S)
+            }
+
+            override fun onError(e: Exception?) {
+                listener.failed(e as F)
+            }
+        })
+    }
+
+    fun <S,F>forgotPassword(username: String, listener:SuccessFailureContract<S,F>){
+        AWSCommHandler.getMobileClient().forgotPassword(username, object :Callback<ForgotPasswordResult>{
+            override fun onResult(result: ForgotPasswordResult?) {
+                listener.successful(result as S)
+            }
+
+            override fun onError(e: Exception?) {
+                listener.failed(e as F)
+            }
+        })
+    }
+
+    fun <S, F> confirmForgotPassword(newPassword:String, confirmationCode:String, listener: SuccessFailureContract<S,F>){
+        AWSCommHandler.getMobileClient().confirmForgotPassword(newPassword, confirmationCode, object :Callback<ForgotPasswordResult>{
+            override fun onResult(result: ForgotPasswordResult?) {
                 listener.successful(result as S)
             }
 

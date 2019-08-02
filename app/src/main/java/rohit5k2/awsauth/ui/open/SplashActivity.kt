@@ -21,6 +21,10 @@ class SplashActivity : BaseActivity() {
         initAwsComponents()
     }
 
+    override fun wireEvents() {
+        // Nothing to be done here
+    }
+
     private fun initAwsComponents(){
         AWSCommHandler(this.applicationContext, object : SuccessFailureContract<UserStateDetails, String> {
             override fun successful(userStatusDetails: UserStateDetails) {

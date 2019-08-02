@@ -9,6 +9,7 @@ import rohit5k2.awsauth.R
 import rohit5k2.awsauth.backend.handler.AwsAPIHandler
 import rohit5k2.awsauth.model.SignUpData
 import rohit5k2.awsauth.ui.helper.BaseActivity
+import rohit5k2.awsauth.ui.helper.BaseDialog
 import rohit5k2.awsauth.ui.helper.SuccessFailureContract
 import rohit5k2.awsauth.ui.subui.ConfirmationDialog
 import java.lang.Exception
@@ -23,11 +24,9 @@ class SignUpActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-
-        initUI()
     }
 
-    private fun initUI(){
+    override fun wireEvents(){
         signup.setOnClickListener {
             signup()
             //showCodeConfirmationDialog()
@@ -65,7 +64,7 @@ class SignUpActivity: BaseActivity() {
     }
 
     private fun showCodeConfirmationDialog(){
-        confiramationDialog = ConfirmationDialog(this@SignUpActivity, signUpData!!.email, object :ConfirmationDialog.Callback{
+        confiramationDialog = ConfirmationDialog(this@SignUpActivity, signUpData!!.email, object :BaseDialog.Callback{
             override fun done() {
                 goToLogin()
             }

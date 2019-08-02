@@ -11,6 +11,14 @@ import rohit5k2.awsauth.ui.secure.MainActivity
  */
 abstract class BaseActivity: AppCompatActivity() {
 
+    override fun setContentView(layoutResID: Int) {
+        super.setContentView(layoutResID)
+
+        wireEvents()
+    }
+
+    abstract fun wireEvents()
+
     protected fun showToast(message:String){
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
