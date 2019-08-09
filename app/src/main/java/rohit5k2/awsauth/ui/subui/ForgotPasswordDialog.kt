@@ -53,9 +53,7 @@ class ForgotPasswordDialog(context: Context, listener:Callback):BaseDialog(conte
                 }
 
                 override fun failed(data: Exception) {
-                    ThreadUtils.runOnUiThread {
-                        l.showMessage("Password Reset Failed.")
-                    }
+                    l.showMessage("Password Reset Failed.")
                 }
             }
         )
@@ -81,9 +79,7 @@ class ForgotPasswordDialog(context: Context, listener:Callback):BaseDialog(conte
                 }
 
                 override fun failed(data: Exception) {
-                    ThreadUtils.runOnUiThread {
-                        l.showMessage("Password Reset Failed")
-                    }
+                    l.showMessage("Password Reset Failed")
                 }
             }
         )

@@ -13,9 +13,9 @@ import rohit5k2.awsauth.ui.helper.BaseActivity
 import rohit5k2.awsauth.ui.helper.BaseDialog
 import rohit5k2.awsauth.ui.helper.SuccessFailureContract
 import rohit5k2.awsauth.ui.subui.ConfirmationDialog
+import rohit5k2.awsauth.ui.subui.ForceChangePassDialog
 import rohit5k2.awsauth.ui.subui.ForgotPasswordDialog
 import rohit5k2.awsauth.utils.CLog
-import javax.security.auth.callback.Callback
 
 /**
  * Created by Rohit on 7/31/2019:4:25 PM
@@ -47,19 +47,13 @@ class LoginActivity : BaseActivity() {
             object :SuccessFailureContract<SignInResult, Exception>{
                 override fun successful(data: SignInResult) {
                     CLog.i("Sign in state is ${data.signInState}")
-                    if(data.signInState == SignInState.DONE)
-                        goToMain()
-                    else
-                        failed(java.lang.Exception())
-
-                    //TODO: NEW_PASSWORD_REQUIRED
-                    /**
-                     * ------Confirm sign in flow-----
-                     * For users which are required to change their passwords after successful first login.
-                     * This challenge should be passed with NEW_PASSWORD and any other required attributes.
-                     *
-                     * This need FORCE change password flow
-                     */
+                    when {
+                        data.signInState == SignInState.DONE -> goToMain()
+                        data.signInState == SignInState.NEW_PASSWORD_REQUIRED -> {
+                            showForceChangePasswordDialog()
+                        }
+                        else -> failed(java.lang.Exception())
+                    }
                 }
 
                 override fun failed(data: Exception) {
@@ -73,27 +67,25 @@ class LoginActivity : BaseActivity() {
             })
     }
 
-    private fun showForgotPasswordDialog(){
-        ForgotPasswordDialog(this@LoginActivity, object :BaseDialog.Callback{
-            override fun done() {
-                goToLogin()
-            }
+    private fun showForceChangePasswordDialog(){
+        ForceChangePassDialog(this@LoginActivity, dialogListener).show()
+    }
 
-            override fun showMessage(message: String) {
-                showToast(message)
-            }
-        }).show()
+    private fun showForgotPasswordDialog(){
+        ForgotPasswordDialog(this@LoginActivity, dialogListener).show()
     }
 
     private fun showCodeConfirmationDialog(){
-        ConfirmationDialog(this@LoginActivity, login_emailid.text.toString(), object : BaseDialog.Callback{
-            override fun done() {
-                goToLogin()
-            }
+        ConfirmationDialog(this@LoginActivity, login_emailid.text.toString(), dialogListener).show()
+    }
 
-            override fun showMessage(message: String) {
-                showToast(message)
-            }
-        }).show()
+    private val dialogListener = object :BaseDialog.Callback{
+        override fun done() {
+            goToLogin()
+        }
+
+        override fun showMessage(message: String) {
+            ThreadUtils.runOnUiThread { showToast(message) }
+        }
     }
 }

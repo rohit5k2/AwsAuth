@@ -56,9 +56,7 @@ class ConfirmationDialog(context: Context, userName: String, listener:Callback):
             }
 
             override fun failed(data: Exception) {
-                ThreadUtils.runOnUiThread {
-                    l.showMessage("Confirmation failed, please try again.")
-                }
+                l.showMessage("Confirmation failed, please try again.")
             }
         })
     }
@@ -66,16 +64,12 @@ class ConfirmationDialog(context: Context, userName: String, listener:Callback):
     private fun resendCode(){
         AwsAPIHandler.instance.resendCode(data, object : SuccessFailureContract<SignUpResult, Exception> {
             override fun successful(data: SignUpResult) {
-                ThreadUtils.runOnUiThread{
-                    l.showMessage("A verification code has been sent via" + data.userCodeDeliveryDetails.deliveryMedium
+                l.showMessage("A verification code has been sent via" + data.userCodeDeliveryDetails.deliveryMedium
                             + " at " + data.userCodeDeliveryDetails.destination)
-                }
             }
 
             override fun failed(data: Exception) {
-                ThreadUtils.runOnUiThread {
-                    l.showMessage("Something weird happened while resending code.")
-                }
+                l.showMessage("Something weird happened while resending code.")
             }
         })
     }
