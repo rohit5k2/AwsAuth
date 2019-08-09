@@ -11,4 +11,5 @@
     <color name="frame_border_color">#abb2b9</color>
     <color name="default_blue">#0041c0</color>
     <color name="screen_bg">#d5d8dc</color>
+    <color name="hint">#fadbd8</color>
 </resources>
