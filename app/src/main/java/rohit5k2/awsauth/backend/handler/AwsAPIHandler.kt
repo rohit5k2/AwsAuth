@@ -106,4 +106,16 @@ class AwsAPIHandler {
     fun logout(){
         AWSCommHandler.getMobileClient().signOut()
     }
+
+    fun getUsername():String{
+        return AWSCommHandler.getMobileClient().username
+    }
+
+    fun isSignedIn():String{
+        return if(AWSCommHandler.getMobileClient().isSignedIn) "Logged In" else "Not logged In"
+    }
+
+    fun getIdentityId():String{
+        return AWSCommHandler.getMobileClient().identityId
+    }
 }
